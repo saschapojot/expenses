@@ -15,8 +15,21 @@ df['Amount_in_HKD'] = df.apply(
     lambda row: row['Amount'] * exchange_rate_cny_to_hkd if row['Currency'] == 'CNY' else row['Amount'], axis=1
 )
 
+
+
 #pie plot
 category_sums = df.groupby('Category')['Amount_in_HKD'].sum()
+print(df.groupby('Category')['Amount_in_HKD'].sum())
+
+Deposit_amount=category_sums["Deposit"]
+Cafe_amount=category_sums["Cafe"]
+Hotel_amount=category_sums["Hotel"]
+Shoes_amount=category_sums["Shoes"]
+Medication_amount=category_sums["Medication"]
+diff=np.sum(Amount_col)-Deposit_amount-Cafe_amount-Hotel_amount-Shoes_amount\
+    -Medication_amount
+print(diff)
+
 plt.figure(figsize=(6,6))
 plt.pie(category_sums, labels=category_sums.index, autopct='%1.1f%%')
 
