@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-df=pd.read_csv("24_08_25to24_09_24.csv")
+df=pd.read_csv("24_09_25to24_10_24.csv")
 
 
 
@@ -21,14 +21,13 @@ df['Amount_in_HKD'] = df.apply(
 category_sums = df.groupby('Category')['Amount_in_HKD'].sum()
 print(df.groupby('Category')['Amount_in_HKD'].sum())
 
-Deposit_amount=category_sums["Deposit"]
-Cafe_amount=category_sums["Cafe"]
+# Deposit_amount=category_sums["Deposit"]
+# Cafe_amount=category_sums["Cafe"]
 Hotel_amount=category_sums["Hotel"]
-Shoes_amount=category_sums["Shoes"]
+# Shoes_amount=category_sums["Shoes"]
 Medication_amount=category_sums["Medication"]
-diff=np.sum(Amount_col)-Deposit_amount-Cafe_amount-Hotel_amount-Shoes_amount\
-    -Medication_amount
-print(diff)
+val=category_sums["Rent"]+category_sums["Credit_card"]
+print("total="+str(np.sum(df['Amount_in_HKD'])))
 
 plt.figure(figsize=(6,6))
 plt.pie(category_sums, labels=category_sums.index, autopct='%1.1f%%')
